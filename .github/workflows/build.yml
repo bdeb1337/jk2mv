@@ -153,6 +153,12 @@ jobs:
         submodules: true
         fetch-depth: 0
 
+    - name: Locate Visual Studio 2019
+      run: |
+        $vsPath = &"C:\Program Files (x86)\Microsoft Visual Studio\Installer\vswhere.exe" -latest -version [16.0,17.0) -products * -requires Microsoft.Component.MSBuild -property installationPath
+        echo "##[set-env name=VSINSTALLDIR]$vsPath"
+        echo "##[set-env name=VisualStudioVersion]16.0"
+
     - name: Install WinXP Toolset
       shell: powershell
       run: |
